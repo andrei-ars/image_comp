@@ -154,7 +154,7 @@ if __name__ == "__main__":
     # Decay LR by a factor of 0.1 every 7 epochs
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
     trained_model = train_model(model, criterion, optimizer_ft, exp_lr_scheduler,
-        num_epochs=30)
+        num_epochs=100)
 
     os.system("mkdir -p ./saved_model/")
     torch.save(trained_model.state_dict(), MODEL_PATH)
