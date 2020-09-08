@@ -24,7 +24,9 @@ def compare_images(im1, im2, model):
     input_tensor = transform(im).float().unsqueeze(0)
     output_tensor = model(input_tensor).detach()
     prediction = F.softmax(output_tensor, dim=1).numpy()[0]
-    return prediction
+    similarity = prediction[0]
+    difference = prediction[1]
+    return difference
 
 
 if __name__ == "__main__":
@@ -35,7 +37,6 @@ if __name__ == "__main__":
 
     im1 = Image.open("test_images/1.png")
     im2 = Image.open("test_images/2.png")
-    prediction = compare_images(im1, im2, model)
-    label = np.argmax(prediction)
-    print("prediction:", prediction)
-    print("label:", label)
+    difference = compare_images(im1, im2, model)
+    print("difference:", difference)
+    print("0 means that the images are the same, 1 means that images are different")
